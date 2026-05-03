@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "chebi": "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=CHEBI:",
+    "cheminf": "http://semanticscience.org/resource/CHEMINF_",
+    "sigmal": "https://api.sigmaaldrich.com/vocab/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Product": "schema:Product",
+    "ChemicalSubstance": "schema:ChemicalSubstance",
+    "SafetyDataSheet": "sigmal:SafetyDataSheet",
+
+    "id": "@id",
+    "catalogNumber": "schema:productID",
+    "name": "schema:name",
+    "description": "schema:description",
+    "brand": "schema:brand",
+    "casNumber": {
+      "@id": "sigmal:casNumber",
+      "@type": "xsd:string"
+    },
+    "formula": {
+      "@id": "sigmal:molecularFormula",
+      "@type": "xsd:string"
+    },
+    "molecularWeight": {
+      "@id": "sigmal:molecularWeight",
+      "@type": "xsd:decimal"
+    },
+    "smiles": {
+      "@id": "cheminf:000018",
+      "@type": "xsd:string"
+    },
+    "inchi": {
+      "@id": "cheminf:000113",
+      "@type": "xsd:string"
+    },
+    "inchiKey": {
+      "@id": "cheminf:000059",
+      "@type": "xsd:string"
+    },
+    "purity": "sigmal:purity",
+    "grade": "sigmal:grade",
+    "physicalState": "sigmal:physicalState",
+    "synonyms": "schema:alternateName",
+    "price": "schema:price",
+    "currency": "schema:priceCurrency",
+    "stockLevel": "schema:availability",
+    "revisionDate": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:date"
+    },
+    "pdfUrl": {
+      "@id": "schema:url",
+      "@type": "@id"
+    }
+  }
+}

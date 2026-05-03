@@ -1,0 +1,86 @@
+extends: spectral:oas
+rules:
+  # Sigma-Aldrich uses API key authentication
+  sigma-aldrich-api-key-auth:
+    description: Sigma-Aldrich API must use API key authentication via x-api-key header
+    message: API security must use apiKey type with x-api-key header
+    severity: error
+    given: "$.components.securitySchemes[?(@.type == 'apiKey')]"
+    then:
+      field: name
+      function: enumeration
+      functionOptions:
+        values:
+          - x-api-key
+
+  # Product search must require a query parameter
+  sigma-aldrich-search-requires-query:
+    description: Product search endpoints must require a search query parameter
+    message: Search endpoint should require a 'q' query parameter
+    severity: warn
+    given: "$.paths[?(@property =~ /search/)].get.parameters[?(@.in == 'query')]"
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^(q|query|keyword|cas|smiles|inchi)$"
+
+  # CAS number parameters should validate format
+  sigma-aldrich-cas-number-format:
+    description: CAS number path parameters should validate the CAS format pattern
+    message: CAS number parameter should use format validation pattern
+    severity: warn
+    given: "$.components.parameters[?(@.name == 'casNumber')]"
+    then:
+      field: schema.pattern
+      function: truthy
+
+  # Chemical structure searches should require structure and searchType
+  sigma-aldrich-structure-search-required-fields:
+    description: Structure search request must include structure and searchType fields
+    message: Structure search schema must require 'structure' and 'searchType' fields
+    severity: error
+    given: "$.components.schemas.StructureSearchRequest"
+    then:
+      field: required
+      function: truthy
+
+  # All operations must have a summary
+  sigma-aldrich-operation-summary-required:
+    description: All operations must have a summary
+    message: Operation is missing a summary
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+
+  # Operations must have operationId
+  sigma-aldrich-operation-id-required:
+    description: All operations must define an operationId
+    message: Operation is missing an operationId
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: operationId
+      function: truthy
+
+  # Stock level should use enumeration
+  sigma-aldrich-stock-level-enum:
+    description: Stock level field should use enumerated values
+    message: stockLevel should define an enum
+    severity: warn
+    given: "$.components.schemas[*].properties.stockLevel"
+    then:
+      field: enum
+      function: truthy
+
+  # Search results should include pagination metadata
+  sigma-aldrich-search-results-pagination:
+    description: Search result schemas should include total, page, and pageSize
+    message: Search results should define total, page, and pageSize properties
+    severity: warn
+    given: "$.components.schemas.ProductSearchResults.properties"
+    then:
+      field: total
+      function: truthy

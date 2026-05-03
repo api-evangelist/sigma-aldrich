@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.sigmaaldrich.com/v1/products/search",
+    "headers": {
+      "x-api-key": "your-api-key-here"
+    },
+    "query": {
+      "q": "sodium chloride",
+      "pageSize": 5,
+      "page": 1
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "results": [
+        {
+          "catalogNumber": "S9888",
+          "name": "Sodium chloride",
+          "description": "Sodium chloride BioXtra, ≥99.5% (AT)",
+          "brand": "Sigma",
+          "casNumber": "7647-14-5",
+          "formula": "ClNa",
+          "molecularWeight": 58.44,
+          "smiles": "[Na+].[Cl-]",
+          "purity": "≥99.5%",
+          "grade": "BioXtra",
+          "physicalState": "solid",
+          "packagingOptions": [
+            { "packSize": "100g", "packagingType": "bottle" },
+            { "packSize": "500g", "packagingType": "bottle" },
+            { "packSize": "1kg", "packagingType": "bottle" }
+          ]
+        }
+      ],
+      "total": 47,
+      "page": 1,
+      "pageSize": 5
+    }
+  }
+}

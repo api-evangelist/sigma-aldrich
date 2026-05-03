@@ -1,0 +1,53 @@
+{
+  "title": "Sigma-Aldrich Product Catalog Structure",
+  "description": "Data model for Sigma-Aldrich research chemical and biochemical products",
+  "type": "object",
+  "structure": {
+    "Product": {
+      "description": "A research chemical, biochemical, or laboratory supply in the Sigma-Aldrich catalog",
+      "fields": {
+        "catalogNumber": { "type": "string", "role": "identifier" },
+        "name": { "type": "string", "role": "label" },
+        "brand": { "type": "enum", "values": ["Sigma", "Aldrich", "Fluka", "Supelco"], "role": "brand" },
+        "casNumber": { "type": "string", "role": "chemical-identifier", "format": "CAS Registry Number" },
+        "formula": { "type": "string", "role": "chemical-identifier", "format": "Molecular Formula" },
+        "molecularWeight": { "type": "number", "role": "measurement", "unit": "g/mol" },
+        "smiles": { "type": "string", "role": "chemical-structure" },
+        "inchi": { "type": "string", "role": "chemical-structure" },
+        "purity": { "type": "string", "role": "specification" },
+        "grade": { "type": "string", "role": "classification" },
+        "physicalState": { "type": "enum", "values": ["solid", "liquid", "gas"], "role": "physical-property" }
+      },
+      "children": {
+        "PackagingOption": {
+          "description": "An available package size and container format for a product",
+          "fields": {
+            "packSize": { "type": "string", "role": "quantity" },
+            "packagingType": { "type": "string", "role": "container" }
+          },
+          "children": {
+            "PriceOption": {
+              "description": "Pricing and availability for a specific packaging in a region",
+              "fields": {
+                "country": { "type": "string", "role": "geography" },
+                "currency": { "type": "string", "role": "currency" },
+                "price": { "type": "number", "role": "price" },
+                "stockLevel": { "type": "enum", "values": ["in-stock", "low-stock", "out-of-stock", "discontinued"] },
+                "leadTimeDays": { "type": "integer", "role": "delivery" }
+              }
+            }
+          }
+        },
+        "SafetyDataSheet": {
+          "description": "GHS-compliant Safety Data Sheet containing hazard and handling information",
+          "fields": {
+            "version": { "type": "string", "role": "version" },
+            "revisionDate": { "type": "date", "role": "temporal" },
+            "language": { "type": "string", "role": "locale" },
+            "pdfUrl": { "type": "uri", "role": "document" }
+          }
+        }
+      }
+    }
+  }
+}

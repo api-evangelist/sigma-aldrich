@@ -1,0 +1,457 @@
+openapi: 3.1.0
+info:
+  title: Sigma-Aldrich Product Search API
+  description: >-
+    The Sigma-Aldrich Product Search API provides programmatic access to the
+    Sigma-Aldrich product catalog — one of the largest collections of research
+    chemicals, biochemicals, reagents, and laboratory supplies in the world.
+    Researchers and LIMS systems can search products by catalog number, CAS
+    number, product name, or chemical structure notation (SMILES/InChI) and
+    retrieve detailed product information including specifications, safety
+    data, pricing, and availability from global distribution centers.
+  version: '1.0'
+  contact:
+    name: Sigma-Aldrich Customer Support
+    url: https://www.sigmaaldrich.com/US/en/support/contact-us
+  termsOfService: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+  license:
+    name: Proprietary
+    url: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+externalDocs:
+  description: Sigma-Aldrich Developer Portal
+  url: https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
+servers:
+  - url: https://api.sigmaaldrich.com/v1
+    description: Sigma-Aldrich Production API
+tags:
+  - name: Products
+    description: >-
+      Product catalog search and retrieval for research chemicals, biochemicals,
+      and laboratory supplies.
+  - name: Structures
+    description: >-
+      Chemical structure search using SMILES, InChI, or molecular formula
+      notation for cheminformatics workflows.
+  - name: Safety Data Sheets
+    description: >-
+      Retrieval of GHS-compliant Safety Data Sheets for regulatory compliance
+      and laboratory safety management.
+  - name: Pricing and Availability
+    description: >-
+      Real-time pricing and global stock availability for Sigma-Aldrich products.
+security:
+  - ApiKeyAuth: []
+paths:
+  /products/search:
+    get:
+      operationId: searchProducts
+      summary: Search Products
+      description: >-
+        Search the Sigma-Aldrich product catalog by keyword, product name,
+        catalog number, CAS number, or chemical formula. Returns paginated
+        product results with basic metadata.
+      tags:
+        - Products
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query (product name, catalog number, CAS number, or formula)
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+          description: Number of results per page
+        - name: brand
+          in: query
+          schema:
+            type: string
+          description: Filter by brand (e.g., Sigma, Aldrich, Fluka, Supelco)
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum:
+              - substance
+              - kit
+              - labware
+              - reagent
+          description: Filter by product type
+      responses:
+        '200':
+          description: Product search results returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResults'
+        '400':
+          description: Invalid search parameters
+        '401':
+          description: Invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+
+  /products/{catalogNumber}:
+    get:
+      operationId: getProduct
+      summary: Get Product by Catalog Number
+      description: >-
+        Returns detailed information for a specific product by its Sigma-Aldrich
+        catalog number, including specifications, synonyms, physicochemical
+        properties, safety data, and packaging options.
+      tags:
+        - Products
+      parameters:
+        - $ref: '#/components/parameters/catalogNumber'
+      responses:
+        '200':
+          description: Product details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: Product not found
+
+  /products/cas/{casNumber}:
+    get:
+      operationId: getProductByCas
+      summary: Get Product by CAS Number
+      description: >-
+        Returns products matching a Chemical Abstracts Service (CAS) Registry
+        Number. Multiple products may match a CAS number when a substance is
+        available in different grades or formulations.
+      tags:
+        - Products
+      parameters:
+        - $ref: '#/components/parameters/casNumber'
+      responses:
+        '200':
+          description: Products matching CAS number returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResults'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: No products found for CAS number
+
+  /structures/search:
+    post:
+      operationId: searchByStructure
+      summary: Search by Chemical Structure
+      description: >-
+        Search for products by chemical structure using SMILES or InChI notation.
+        Supports exact match, substructure search, and similarity search modes.
+        Returns products containing or matching the specified chemical structure.
+      tags:
+        - Structures
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StructureSearchRequest'
+      responses:
+        '200':
+          description: Structure search results returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResults'
+        '400':
+          description: Invalid structure notation
+        '401':
+          description: Invalid or missing API key
+
+  /products/{catalogNumber}/sds:
+    get:
+      operationId: getProductSds
+      summary: Get Safety Data Sheet
+      description: >-
+        Returns the GHS-compliant Safety Data Sheet for a specific product.
+        SDSs are available in multiple languages and can be returned as JSON
+        metadata or a PDF document URL for download.
+      tags:
+        - Safety Data Sheets
+      parameters:
+        - $ref: '#/components/parameters/catalogNumber'
+        - name: language
+          in: query
+          schema:
+            type: string
+            default: en-US
+          description: Language code for the SDS (e.g., en-US, de-DE, fr-FR, zh-CN)
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum:
+              - json
+              - pdf-url
+            default: json
+          description: Response format — structured JSON or PDF download URL
+      responses:
+        '200':
+          description: Safety data sheet returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SafetyDataSheet'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: SDS not found for this product
+
+  /products/{catalogNumber}/pricing:
+    get:
+      operationId: getProductPricing
+      summary: Get Product Pricing and Availability
+      description: >-
+        Returns current pricing and real-time stock availability for all
+        packaging sizes of a product in the specified country/region.
+      tags:
+        - Pricing and Availability
+      parameters:
+        - $ref: '#/components/parameters/catalogNumber'
+        - name: country
+          in: query
+          schema:
+            type: string
+            default: US
+          description: ISO 3166-1 alpha-2 country code for regional pricing
+      responses:
+        '200':
+          description: Pricing and availability returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPricing'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: Product not found
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Sigma-Aldrich API key for authentication
+
+  parameters:
+    catalogNumber:
+      name: catalogNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
+    casNumber:
+      name: casNumber
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^\d{1,7}-\d{2}-\d{1}$'
+      description: CAS Registry Number in standard format (e.g., 7732-18-5 for water)
+
+  schemas:
+    Product:
+      type: object
+      properties:
+        catalogNumber:
+          type: string
+          description: Sigma-Aldrich catalog number
+        name:
+          type: string
+          description: Product name
+        description:
+          type: string
+          description: Product description
+        brand:
+          type: string
+          description: Sigma-Aldrich brand (Sigma, Aldrich, Fluka, Supelco)
+        casNumber:
+          type: string
+          description: CAS Registry Number
+        formula:
+          type: string
+          description: Molecular formula (e.g., C2H6O for ethanol)
+        molecularWeight:
+          type: number
+          description: Molecular weight in g/mol
+        smiles:
+          type: string
+          description: SMILES notation for the chemical structure
+        inchi:
+          type: string
+          description: IUPAC International Chemical Identifier (InChI)
+        purity:
+          type: string
+          description: Purity specification (e.g., ≥99.5%)
+        grade:
+          type: string
+          description: Product grade (e.g., ACS reagent, BioReagent, HPLC Plus)
+        synonyms:
+          type: array
+          items:
+            type: string
+          description: Alternative names for the product
+        physicalState:
+          type: string
+          enum:
+            - solid
+            - liquid
+            - gas
+          description: Physical state at room temperature
+        packagingOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackagingOption'
+
+    PackagingOption:
+      type: object
+      properties:
+        packSize:
+          type: string
+          description: Package size (e.g., 100g, 500mL, 1kg)
+        packagingType:
+          type: string
+          description: Container type (e.g., bottle, ampule, vial)
+
+    ProductSearchResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+          description: Total number of matching products
+        page:
+          type: integer
+        pageSize:
+          type: integer
+
+    StructureSearchRequest:
+      type: object
+      required:
+        - structure
+        - searchType
+      properties:
+        structure:
+          type: string
+          description: Chemical structure in SMILES or InChI notation
+        searchType:
+          type: string
+          enum:
+            - exact
+            - substructure
+            - similarity
+          description: Type of structure search to perform
+        similarityThreshold:
+          type: number
+          minimum: 0
+          maximum: 1
+          default: 0.7
+          description: Minimum similarity score for similarity searches (0-1)
+        notation:
+          type: string
+          enum:
+            - smiles
+            - inchi
+          default: smiles
+          description: Chemical structure notation format
+
+    SafetyDataSheet:
+      type: object
+      properties:
+        catalogNumber:
+          type: string
+          description: Catalog number the SDS applies to
+        version:
+          type: string
+          description: SDS version number
+        revisionDate:
+          type: string
+          format: date
+          description: Date of last SDS revision
+        language:
+          type: string
+          description: Language code of this SDS
+        sections:
+          type: object
+          description: GHS SDS sections (1-16) with structured content
+          properties:
+            section1:
+              type: object
+              description: Identification
+            section2:
+              type: object
+              description: Hazard Identification
+            section3:
+              type: object
+              description: Composition/Information on Ingredients
+            section7:
+              type: object
+              description: Handling and Storage
+            section8:
+              type: object
+              description: Exposure Controls/Personal Protection
+        pdfUrl:
+          type: string
+          format: uri
+          description: URL to download the PDF version of the SDS
+
+    ProductPricing:
+      type: object
+      properties:
+        catalogNumber:
+          type: string
+        country:
+          type: string
+          description: Country code for pricing
+        currency:
+          type: string
+          description: Currency code (e.g., USD, EUR, GBP)
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceOption'
+
+    PriceOption:
+      type: object
+      properties:
+        packSize:
+          type: string
+          description: Package size
+        price:
+          type: number
+          description: List price
+        stockLevel:
+          type: string
+          enum:
+            - in-stock
+            - low-stock
+            - out-of-stock
+            - discontinued
+          description: Current stock availability
+        leadTimeDays:
+          type: integer
+          description: Expected delivery lead time in business days

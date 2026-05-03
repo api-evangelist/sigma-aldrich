@@ -1,0 +1,214 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Sigma-Aldrich Chemical Research"
+  description: >-
+    Unified workflow capability for chemical and life science research workflows
+    using the Sigma-Aldrich product catalog API. Enables researchers, LIMS
+    systems, and EHS platforms to search the world's largest chemical catalog,
+    perform structure-based lookups, retrieve safety data sheets for regulatory
+    compliance, and check product pricing and availability. Designed for
+    research chemists, computational chemists, EHS managers, and procurement
+    teams working with life science materials.
+  tags:
+    - Life Science
+    - Chemistry
+    - Research
+    - Cheminformatics
+    - Safety
+    - LIMS
+    - Procurement
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SIGMA_ALDRICH_API_KEY: SIGMA_ALDRICH_API_KEY
+
+capability:
+  consumes:
+    - import: sigma-aldrich
+      location: ./shared/sigma-aldrich-products.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: sigma-aldrich-research-api
+      description: "Unified REST API for Sigma-Aldrich chemical research and procurement workflows."
+      resources:
+        - path: /v1/products/search
+          name: product-search
+          description: "Product catalog search"
+          operations:
+            - method: GET
+              name: search-products
+              description: "Search Sigma-Aldrich product catalog by keyword, name, or formula"
+              call: "sigma-aldrich.search-products"
+              with:
+                q: "rest.q"
+                page: "rest.page"
+                pageSize: "rest.pageSize"
+                brand: "rest.brand"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/products/{catalogNumber}
+          name: product
+          description: "Product lookup by catalog number"
+          operations:
+            - method: GET
+              name: get-product
+              description: "Get product details by Sigma-Aldrich catalog number"
+              call: "sigma-aldrich.get-product"
+              with:
+                catalogNumber: "rest.catalogNumber"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/products/cas/{casNumber}
+          name: product-by-cas
+          description: "Product lookup by CAS number"
+          operations:
+            - method: GET
+              name: get-product-by-cas
+              description: "Find products by CAS Registry Number"
+              call: "sigma-aldrich.get-product-by-cas"
+              with:
+                casNumber: "rest.casNumber"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/structures/search
+          name: structure-search
+          description: "Chemical structure search"
+          operations:
+            - method: POST
+              name: search-by-structure
+              description: "Search by chemical structure using SMILES or InChI"
+              call: "sigma-aldrich.search-by-structure"
+              with:
+                structure: "rest.structure"
+                searchType: "rest.searchType"
+                notation: "rest.notation"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/products/{catalogNumber}/sds
+          name: safety-data-sheet
+          description: "Safety Data Sheet retrieval"
+          operations:
+            - method: GET
+              name: get-sds
+              description: "Get GHS Safety Data Sheet for a product"
+              call: "sigma-aldrich.get-product-sds"
+              with:
+                catalogNumber: "rest.catalogNumber"
+                language: "rest.language"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/products/{catalogNumber}/pricing
+          name: pricing
+          description: "Product pricing and availability"
+          operations:
+            - method: GET
+              name: get-pricing
+              description: "Get product pricing and stock availability"
+              call: "sigma-aldrich.get-product-pricing"
+              with:
+                catalogNumber: "rest.catalogNumber"
+                country: "rest.country"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: sigma-aldrich-research-mcp
+      transport: http
+      description: "MCP server for AI-assisted chemical research and life science procurement using Sigma-Aldrich."
+      tools:
+        - name: search-chemicals
+          description: "Search the Sigma-Aldrich catalog for chemicals, reagents, and biochemicals by name, formula, or keyword"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sigma-aldrich.search-products"
+          with:
+            q: "tools.q"
+            page: "tools.page"
+            pageSize: "tools.pageSize"
+            brand: "tools.brand"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-product-details
+          description: "Get detailed information about a Sigma-Aldrich product by catalog number"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sigma-aldrich.get-product"
+          with:
+            catalogNumber: "tools.catalogNumber"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: lookup-by-cas-number
+          description: "Find Sigma-Aldrich products by CAS Registry Number (e.g., 7732-18-5 for water)"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sigma-aldrich.get-product-by-cas"
+          with:
+            casNumber: "tools.casNumber"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: search-by-chemical-structure
+          description: "Search for chemicals by structure using SMILES or InChI notation with exact, substructure, or similarity matching"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sigma-aldrich.search-by-structure"
+          with:
+            structure: "tools.structure"
+            searchType: "tools.searchType"
+            notation: "tools.notation"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-safety-data-sheet
+          description: "Retrieve the GHS Safety Data Sheet for a Sigma-Aldrich chemical product for regulatory compliance"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sigma-aldrich.get-product-sds"
+          with:
+            catalogNumber: "tools.catalogNumber"
+            language: "tools.language"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-product-pricing
+          description: "Get current pricing and stock availability for a Sigma-Aldrich product by country"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sigma-aldrich.get-product-pricing"
+          with:
+            catalogNumber: "tools.catalogNumber"
+            country: "tools.country"
+          outputParameters:
+            - type: object
+              mapping: "$."

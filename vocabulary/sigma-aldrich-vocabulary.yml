@@ -1,0 +1,133 @@
+vocabulary:
+  name: Sigma-Aldrich Life Science Vocabulary
+  description: >-
+    Domain vocabulary for the Sigma-Aldrich research chemical and biochemical
+    catalog, covering chemical identification, product classification, safety
+    regulations, and life science research concepts.
+  version: '1.0'
+  created: '2026-05-02'
+  provider: Sigma-Aldrich (MilliporeSigma)
+
+terms:
+  - term: CAS Number
+    definition: >-
+      Chemical Abstracts Service Registry Number — a unique numeric identifier
+      assigned to every chemical substance described in the literature by the
+      American Chemical Society's Chemical Abstracts Service. Format is
+      xxxxxxx-yy-z (up to 7 digits, 2 digits, 1 check digit). Used globally
+      as the definitive identifier for chemical compounds.
+    synonyms:
+      - CAS RN
+      - CAS Registry Number
+    examples:
+      - '7732-18-5: Water (H2O)'
+      - '64-17-5: Ethanol'
+      - '7647-14-5: Sodium Chloride'
+
+  - term: SMILES
+    definition: >-
+      Simplified Molecular Input Line Entry System — a notation that allows
+      a user to represent a chemical structure in a way that can be used
+      by a computer, using ASCII characters to encode atoms, bonds, and
+      connectivity. Used for structure search and cheminformatics workflows.
+    synonyms:
+      - Simplified Molecular Input Line Entry System
+
+  - term: InChI
+    definition: >-
+      IUPAC International Chemical Identifier — a textual identifier for
+      chemical substances that encodes the molecular structure in a
+      standardized format. The InChIKey is a hashed 27-character version
+      used for database indexing and web searches.
+    synonyms:
+      - International Chemical Identifier
+
+  - term: Safety Data Sheet (SDS)
+    definition: >-
+      A standardized document providing health and safety information about
+      a chemical substance or mixture, required by GHS (Globally Harmonized
+      System) regulations. Contains 16 mandatory sections including hazard
+      identification, composition, first aid, handling, and storage.
+      Formerly called Material Safety Data Sheet (MSDS).
+    synonyms:
+      - SDS
+      - MSDS
+      - Material Safety Data Sheet
+    related:
+      - GHS
+      - REACH
+
+  - term: GHS
+    definition: >-
+      Globally Harmonized System of Classification and Labelling of Chemicals
+      — a United Nations system for standardizing chemical hazard communication
+      worldwide through uniform SDS formats and hazard pictograms.
+    synonyms:
+      - Globally Harmonized System
+
+  - term: Molecular Weight
+    definition: >-
+      The mass of one molecule of a chemical substance, expressed in grams
+      per mole (g/mol) or unified atomic mass units (u). Calculated as the
+      sum of atomic masses of all atoms in the molecular formula.
+    synonyms:
+      - molar mass
+      - formula weight
+    unit: g/mol
+
+  - term: Purity
+    definition: >-
+      The percentage of the target compound in a chemical sample, with the
+      remainder being other chemicals or impurities. Sigma-Aldrich uses grades
+      such as ≥99.0%, ≥99.5%, ACS reagent, BioReagent, and HPLC grade to
+      indicate purity and suitability for different applications.
+    related:
+      - Grade
+
+  - term: Grade
+    definition: >-
+      A classification indicating the quality and intended application of
+      a chemical product. Common Sigma-Aldrich grades include ACS reagent
+      (meets American Chemical Society purity standards), BioReagent (for
+      biological research), HPLC Plus (high purity for chromatography),
+      ReagentPlus (≥99% purity), and BioXtra (extra purity for biological use).
+    values:
+      - ACS reagent
+      - BioReagent
+      - HPLC Plus
+      - ReagentPlus
+      - BioXtra
+      - Technical grade
+      - Pharmaceutical grade
+
+  - term: Substructure Search
+    definition: >-
+      A chemical structure search mode that finds all compounds in a database
+      that contain the query structure as a subgraph of their molecular graph.
+      Used to find analogs and members of chemical classes in drug discovery
+      and materials science.
+    synonyms:
+      - SSS
+      - substructure query
+
+  - term: Similarity Search
+    definition: >-
+      A chemical structure search mode that ranks compounds by their
+      structural similarity to a query molecule using fingerprint-based
+      algorithms such as Tanimoto coefficient. Allows configuring a
+      similarity threshold to control result set breadth.
+    synonyms:
+      - Tanimoto search
+      - fingerprint similarity
+
+tags:
+  - Life Science
+  - Chemistry
+  - Biochemistry
+  - Cheminformatics
+  - Laboratory
+  - Research
+  - GHS
+  - Safety
+  - Drug Discovery
+  - Materials Science

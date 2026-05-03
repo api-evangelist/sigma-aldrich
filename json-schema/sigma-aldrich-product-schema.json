@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.sigmaaldrich.com/schemas/product",
+  "title": "SigmaAldrichProduct",
+  "description": "Represents a research chemical, biochemical, or laboratory supply in the Sigma-Aldrich product catalog.",
+  "type": "object",
+  "required": ["catalogNumber", "name"],
+  "properties": {
+    "catalogNumber": {
+      "type": "string",
+      "description": "Sigma-Aldrich catalog number uniquely identifying this product"
+    },
+    "name": {
+      "type": "string",
+      "description": "Official product name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description including key applications and specifications"
+    },
+    "brand": {
+      "type": "string",
+      "enum": ["Sigma", "Aldrich", "Fluka", "Supelco", "Honeywell", "Riedel-de Haën"],
+      "description": "Sigma-Aldrich brand under which this product is sold"
+    },
+    "casNumber": {
+      "type": "string",
+      "pattern": "^\\d{1,7}-\\d{2}-\\d{1}$",
+      "description": "Chemical Abstracts Service (CAS) Registry Number"
+    },
+    "formula": {
+      "type": "string",
+      "description": "Molecular formula using Hill notation (e.g., C2H6O for ethanol)"
+    },
+    "molecularWeight": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Molecular weight in g/mol"
+    },
+    "smiles": {
+      "type": "string",
+      "description": "Simplified Molecular Input Line Entry System (SMILES) notation"
+    },
+    "inchi": {
+      "type": "string",
+      "description": "IUPAC International Chemical Identifier (InChI)"
+    },
+    "inchiKey": {
+      "type": "string",
+      "pattern": "^[A-Z]{14}-[A-Z]{10}-[A-Z]$",
+      "description": "Hashed InChI key for chemical structure identification"
+    },
+    "purity": {
+      "type": "string",
+      "description": "Purity specification (e.g., ≥99.5%, ACS reagent grade)"
+    },
+    "grade": {
+      "type": "string",
+      "description": "Product grade designation (e.g., ACS reagent, BioReagent, HPLC Plus, ReagentPlus)"
+    },
+    "synonyms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alternative names, IUPAC names, and common names for the product"
+    },
+    "physicalState": {
+      "type": "string",
+      "enum": ["solid", "liquid", "gas"],
+      "description": "Physical state at standard conditions (25°C, 1 atm)"
+    },
+    "packagingOptions": {
+      "type": "array",
+      "description": "Available package sizes and container types",
+      "items": {
+        "type": "object",
+        "properties": {
+          "packSize": {
+            "type": "string",
+            "description": "Package size (e.g., 100g, 500mL, 1kg)"
+          },
+          "packagingType": {
+            "type": "string",
+            "description": "Container type (e.g., glass bottle, ampule, vial, drum)"
+          }
+        }
+      }
+    }
+  }
+}
