@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sigma-Aldrich Product Search API — Pricing and Availability
+  description: 'Sigma-Aldrich Product Search API — Pricing and Availability. 1 operations. Lead operation: Get Product Pricing
+    and Availability. Self-contained Naftiko capability covering one Sigma Aldrich business surface.'
+  tags:
+  - Sigma Aldrich
+  - Pricing and Availability
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SIGMA_ALDRICH_API_KEY: SIGMA_ALDRICH_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: product-pricing-and-availability
+    baseUri: https://api.sigmaaldrich.com/v1
+    description: Sigma-Aldrich Product Search API — Pricing and Availability business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: products-catalogNumber-pricing
+      path: /products/{catalogNumber}/pricing
+      operations:
+      - name: getproductpricing
+        method: GET
+        description: Get Product Pricing and Availability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: country
+          in: query
+          type: string
+          description: ISO 3166-1 alpha-2 country code for regional pricing
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.SIGMA_ALDRICH_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: product-pricing-and-availability-rest
+    port: 8080
+    description: REST adapter for Sigma-Aldrich Product Search API — Pricing and Availability. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/products/{catalognumber}/pricing
+      name: products-catalognumber-pricing
+      description: REST surface for products-catalogNumber-pricing.
+      operations:
+      - method: GET
+        name: getproductpricing
+        description: Get Product Pricing and Availability
+        call: product-pricing-and-availability.getproductpricing
+        with:
+          country: rest.country
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: product-pricing-and-availability-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sigma-Aldrich Product Search API — Pricing and Availability. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-product-pricing-and-availability
+      description: Get Product Pricing and Availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: product-pricing-and-availability.getproductpricing
+      with:
+        country: tools.country
+      outputParameters:
+      - type: object
+        mapping: $.
