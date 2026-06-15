@@ -1,0 +1,1436 @@
+{
+  "item": [
+    {
+      "id": "132f9a22-8242-44b9-90b3-8074933cf00c",
+      "name": "Products",
+      "description": {
+        "content": "Product catalog search and retrieval for research chemicals, biochemicals, and laboratory supplies.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f313eb5a-39d3-4b90-9d0d-8d353cab8c7c",
+          "name": "Search Products",
+          "request": {
+            "name": "Search Products",
+            "description": {
+              "content": "Search the Sigma-Aldrich product catalog by keyword, product name, catalog number, CAS number, or chemical formula. Returns paginated product results with basic metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Search query (product name, catalog number, CAS number, or formula)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>",
+                  "description": "Filter by brand (e.g., Sigma, Aldrich, Fluka, Supelco)"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by product type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59e1e785-f4e7-4553-9713-a9ef14498ffb",
+              "name": "Product search results returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"catalogNumber\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"brand\": \"string\",\n      \"casNumber\": \"string\",\n      \"formula\": \"string\",\n      \"molecularWeight\": 7905.130773839046,\n      \"smiles\": \"string\",\n      \"inchi\": \"string\",\n      \"purity\": \"string\",\n      \"grade\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"physicalState\": \"solid\",\n      \"packagingOptions\": [\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        },\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        }\n      ]\n    },\n    {\n      \"catalogNumber\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"brand\": \"string\",\n      \"casNumber\": \"string\",\n      \"formula\": \"string\",\n      \"molecularWeight\": 700.5949961920433,\n      \"smiles\": \"string\",\n      \"inchi\": \"string\",\n      \"purity\": \"string\",\n      \"grade\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"physicalState\": \"liquid\",\n      \"packagingOptions\": [\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        },\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total\": 200,\n  \"page\": 3392,\n  \"pageSize\": 462\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "387c1680-5922-46e0-a765-3f177ad111e3",
+              "name": "Invalid search parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b7e62f9a-d3b1-4dea-8e55-fd0fc56c27a5",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95864e6c-ece8-45be-b308-00b11acf165d",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fd01661-92f7-4eb4-bae8-7d8e38cb9624",
+          "name": "Get Product by Catalog Number",
+          "request": {
+            "name": "Get Product by Catalog Number",
+            "description": {
+              "content": "Returns detailed information for a specific product by its Sigma-Aldrich catalog number, including specifications, synonyms, physicochemical properties, safety data, and packaging options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":catalogNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalogNumber",
+                  "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6859e4e7-def6-4730-9630-26d494360664",
+              "name": "Product details returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"catalogNumber\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"brand\": \"string\",\n  \"casNumber\": \"string\",\n  \"formula\": \"string\",\n  \"molecularWeight\": 5520.271620614119,\n  \"smiles\": \"string\",\n  \"inchi\": \"string\",\n  \"purity\": \"string\",\n  \"grade\": \"string\",\n  \"synonyms\": [\n    \"string\",\n    \"string\"\n  ],\n  \"physicalState\": \"liquid\",\n  \"packagingOptions\": [\n    {\n      \"packSize\": \"string\",\n      \"packagingType\": \"string\"\n    },\n    {\n      \"packSize\": \"string\",\n      \"packagingType\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a00d84fa-9d4e-45d6-835a-9b2175012b60",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86e085a7-dcc7-425e-b857-433452b70bf0",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13a44d74-e7cc-4997-9b71-fa0573b7d226",
+          "name": "Get Product by CAS Number",
+          "request": {
+            "name": "Get Product by CAS Number",
+            "description": {
+              "content": "Returns products matching a Chemical Abstracts Service (CAS) Registry Number. Multiple products may match a CAS number when a substance is available in different grades or formulations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                "cas",
+                ":casNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "casNumber",
+                  "description": "(Required) CAS Registry Number in standard format (e.g., 7732-18-5 for water)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f407db2-5021-4518-ad4d-f2b4c61d9696",
+              "name": "Products matching CAS number returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "cas",
+                    ":casNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "casNumber",
+                      "description": "(Required) CAS Registry Number in standard format (e.g., 7732-18-5 for water)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"catalogNumber\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"brand\": \"string\",\n      \"casNumber\": \"string\",\n      \"formula\": \"string\",\n      \"molecularWeight\": 7905.130773839046,\n      \"smiles\": \"string\",\n      \"inchi\": \"string\",\n      \"purity\": \"string\",\n      \"grade\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"physicalState\": \"solid\",\n      \"packagingOptions\": [\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        },\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        }\n      ]\n    },\n    {\n      \"catalogNumber\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"brand\": \"string\",\n      \"casNumber\": \"string\",\n      \"formula\": \"string\",\n      \"molecularWeight\": 700.5949961920433,\n      \"smiles\": \"string\",\n      \"inchi\": \"string\",\n      \"purity\": \"string\",\n      \"grade\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"physicalState\": \"liquid\",\n      \"packagingOptions\": [\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        },\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total\": 200,\n  \"page\": 3392,\n  \"pageSize\": 462\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "708ccee5-298b-47c2-b9e6-8408e34ac02c",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "cas",
+                    ":casNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "casNumber",
+                      "description": "(Required) CAS Registry Number in standard format (e.g., 7732-18-5 for water)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77a1bdf1-b9a5-4272-984e-029809767560",
+              "name": "No products found for CAS number",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "cas",
+                    ":casNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "casNumber",
+                      "description": "(Required) CAS Registry Number in standard format (e.g., 7732-18-5 for water)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6c366785-ac2b-4cf9-a6f9-4740cf62edf5",
+      "name": "Structures",
+      "description": {
+        "content": "Chemical structure search using SMILES, InChI, or molecular formula notation for cheminformatics workflows.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "49f1c418-e647-4d5d-8175-ac089e73f229",
+          "name": "Search by Chemical Structure",
+          "request": {
+            "name": "Search by Chemical Structure",
+            "description": {
+              "content": "Search for products by chemical structure using SMILES or InChI notation. Supports exact match, substructure search, and similarity search modes. Returns products containing or matching the specified chemical structure.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structures",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"structure\": \"<string>\",\n  \"searchType\": \"<string>\",\n  \"similarityThreshold\": 0.7,\n  \"notation\": \"smiles\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "facd5c9a-78e3-4801-95bc-1280ec3adaaa",
+              "name": "Structure search results returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structures",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"searchType\": \"<string>\",\n  \"similarityThreshold\": 0.7,\n  \"notation\": \"smiles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"catalogNumber\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"brand\": \"string\",\n      \"casNumber\": \"string\",\n      \"formula\": \"string\",\n      \"molecularWeight\": 7905.130773839046,\n      \"smiles\": \"string\",\n      \"inchi\": \"string\",\n      \"purity\": \"string\",\n      \"grade\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"physicalState\": \"solid\",\n      \"packagingOptions\": [\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        },\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        }\n      ]\n    },\n    {\n      \"catalogNumber\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"brand\": \"string\",\n      \"casNumber\": \"string\",\n      \"formula\": \"string\",\n      \"molecularWeight\": 700.5949961920433,\n      \"smiles\": \"string\",\n      \"inchi\": \"string\",\n      \"purity\": \"string\",\n      \"grade\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"physicalState\": \"liquid\",\n      \"packagingOptions\": [\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        },\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total\": 200,\n  \"page\": 3392,\n  \"pageSize\": 462\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11b3b840-73e8-4ff5-b817-f4ec4546c551",
+              "name": "Invalid structure notation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structures",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"searchType\": \"<string>\",\n  \"similarityThreshold\": 0.7,\n  \"notation\": \"smiles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd8762db-fae1-4993-a063-a52144cbbaaf",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structures",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"searchType\": \"<string>\",\n  \"similarityThreshold\": 0.7,\n  \"notation\": \"smiles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "885b2634-b00f-455b-bb29-7815b88e7f24",
+      "name": "Safety Data Sheets",
+      "description": {
+        "content": "Retrieval of GHS-compliant Safety Data Sheets for regulatory compliance and laboratory safety management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ce8a9951-5ba3-4530-802d-bc8793c90d03",
+          "name": "Get Safety Data Sheet",
+          "request": {
+            "name": "Get Safety Data Sheet",
+            "description": {
+              "content": "Returns the GHS-compliant Safety Data Sheet for a specific product. SDSs are available in multiple languages and can be returned as JSON metadata or a PDF document URL for download.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":catalogNumber",
+                "sds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "en-US",
+                  "description": "Language code for the SDS (e.g., en-US, de-DE, fr-FR, zh-CN)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format — structured JSON or PDF download URL"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalogNumber",
+                  "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c87c8303-7f0d-4c5c-97d2-b1c92636771f",
+              "name": "Safety data sheet returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "sds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"catalogNumber\": \"string\",\n  \"version\": \"string\",\n  \"revisionDate\": \"1980-09-22\",\n  \"language\": \"string\",\n  \"sections\": {\n    \"section1\": {},\n    \"section2\": {},\n    \"section3\": {},\n    \"section7\": {},\n    \"section8\": {}\n  },\n  \"pdfUrl\": \"https://IvdoMUtcQDdEVdrDlwmOHemhUcnKhSlR.uvf05I.mutTbYCdQ3LHuIQOoGLI-LSE7BmP1ONdJMvrRC\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49774998-9122-4337-a6a2-390887db60ad",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "sds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5ea880f-6a64-455a-b4c6-244bbbffe81f",
+              "name": "SDS not found for this product",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "sds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "913bb7b9-bc31-446c-accd-3d13c1b279ab",
+      "name": "Pricing and Availability",
+      "description": {
+        "content": "Real-time pricing and global stock availability for Sigma-Aldrich products.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a040244-c30f-4545-910d-f92eeba9b779",
+          "name": "Get Product Pricing and Availability",
+          "request": {
+            "name": "Get Product Pricing and Availability",
+            "description": {
+              "content": "Returns current pricing and real-time stock availability for all packaging sizes of a product in the specified country/region.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":catalogNumber",
+                "pricing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "US",
+                  "description": "ISO 3166-1 alpha-2 country code for regional pricing"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalogNumber",
+                  "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd84c760-81c2-46f0-b9a7-99d11c83330f",
+              "name": "Pricing and availability returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"catalogNumber\": \"string\",\n  \"country\": \"string\",\n  \"currency\": \"string\",\n  \"prices\": [\n    {\n      \"packSize\": \"string\",\n      \"price\": 6130.667327209617,\n      \"stockLevel\": \"out-of-stock\",\n      \"leadTimeDays\": 4025\n    },\n    {\n      \"packSize\": \"string\",\n      \"price\": 2906.3523486791933,\n      \"stockLevel\": \"discontinued\",\n      \"leadTimeDays\": 3092\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bf3b7da-ff1c-4710-9720-acc452001076",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71f810e7-c6f3-4c6f-8fcf-1215d6753e70",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sigmaaldrich.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eb0ff539-01e8-4181-8afe-6a0749e550d3",
+    "name": "Sigma-Aldrich Product Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.\n\nContact Support:\n Name: Sigma-Aldrich Customer Support",
+      "type": "text/plain"
+    }
+  }
+}

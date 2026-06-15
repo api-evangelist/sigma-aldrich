@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sigma-Aldrich Product Search API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sigmaaldrich.com/v1/products/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query (product name, catalog number, CAS number, or formula)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "brand",
+                "value": "",
+                "type": "query",
+                "description": "Filter by brand (e.g., Sigma, Aldrich, Fluka, Supelco)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by product type"
+              }
+            ]
+          },
+          "docs": "Search the Sigma-Aldrich product catalog by keyword, product name, catalog number, CAS number, or chemical formula. Returns paginated product results with basic metadata."
+        },
+        {
+          "info": {
+            "name": "Get Product by Catalog Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sigmaaldrich.com/v1/products/:catalogNumber",
+            "params": [
+              {
+                "name": "catalogNumber",
+                "value": "",
+                "type": "path",
+                "description": "Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific product by its Sigma-Aldrich catalog number, including specifications, synonyms, physicochemical properties, safety data, and packaging options."
+        },
+        {
+          "info": {
+            "name": "Get Product by CAS Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sigmaaldrich.com/v1/products/cas/:casNumber",
+            "params": [
+              {
+                "name": "casNumber",
+                "value": "",
+                "type": "path",
+                "description": "CAS Registry Number in standard format (e.g., 7732-18-5 for water)"
+              }
+            ]
+          },
+          "docs": "Returns products matching a Chemical Abstracts Service (CAS) Registry Number. Multiple products may match a CAS number when a substance is available in different grades or formulations."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Structures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search by Chemical Structure",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sigmaaldrich.com/v1/structures/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for products by chemical structure using SMILES or InChI notation. Supports exact match, substructure search, and similarity search modes. Returns products containing or matching the specified chemical structure."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Safety Data Sheets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Safety Data Sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sigmaaldrich.com/v1/products/:catalogNumber/sds",
+            "params": [
+              {
+                "name": "catalogNumber",
+                "value": "",
+                "type": "path",
+                "description": "Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Language code for the SDS (e.g., en-US, de-DE, fr-FR, zh-CN)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format — structured JSON or PDF download URL"
+              }
+            ]
+          },
+          "docs": "Returns the GHS-compliant Safety Data Sheet for a specific product. SDSs are available in multiple languages and can be returned as JSON metadata or a PDF document URL for download."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pricing and Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Product Pricing and Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sigmaaldrich.com/v1/products/:catalogNumber/pricing",
+            "params": [
+              {
+                "name": "catalogNumber",
+                "value": "",
+                "type": "path",
+                "description": "Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code for regional pricing"
+              }
+            ]
+          },
+          "docs": "Returns current pricing and real-time stock availability for all packaging sizes of a product in the specified country/region."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
