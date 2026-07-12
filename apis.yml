@@ -88,6 +88,10 @@ description: >-
   continuing to provide the world's largest catalog of research chemicals, biochemicals, laboratory equipment, and life
   science products to researchers globally.
 common:
+  - type: DomainSecurity
+    url: security/sigma-aldrich-domain-security.yml
+  - type: Authentication
+    url: authentication/sigma-aldrich-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/sigma-aldrich
   - type: Website
