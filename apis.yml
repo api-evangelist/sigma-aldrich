@@ -88,6 +88,8 @@ description: >-
   continuing to provide the world's largest catalog of research chemicals, biochemicals, laboratory equipment, and life
   science products to researchers globally.
 common:
+  - type: AgenticAccess
+    url: agentic-access/sigma-aldrich-agentic-access.yml
   - type: DomainSecurity
     url: security/sigma-aldrich-domain-security.yml
   - type: Authentication
