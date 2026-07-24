@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Sigma-Aldrich Product Search Pricing and Availability API
+  description: The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.
+  version: '1.0'
+  contact:
+    name: Sigma-Aldrich Customer Support
+    url: https://www.sigmaaldrich.com/US/en/support/contact-us
+  termsOfService: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+  license:
+    name: Proprietary
+    url: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+servers:
+- url: https://api.sigmaaldrich.com/v1
+  description: Sigma-Aldrich Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Pricing and Availability
+  description: Real-time pricing and global stock availability for Sigma-Aldrich products.
+paths:
+  /products/{catalogNumber}/pricing:
+    get:
+      operationId: getProductPricing
+      summary: Get Product Pricing and Availability
+      description: Returns current pricing and real-time stock availability for all packaging sizes of a product in the specified country/region.
+      tags:
+      - Pricing and Availability
+      parameters:
+      - $ref: '#/components/parameters/catalogNumber'
+      - name: country
+        in: query
+        schema:
+          type: string
+          default: US
+        description: ISO 3166-1 alpha-2 country code for regional pricing
+      responses:
+        '200':
+          description: Pricing and availability returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPricing'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: Product not found
+components:
+  schemas:
+    ProductPricing:
+      type: object
+      properties:
+        catalogNumber:
+          type: string
+        country:
+          type: string
+          description: Country code for pricing
+        currency:
+          type: string
+          description: Currency code (e.g., USD, EUR, GBP)
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceOption'
+    PriceOption:
+      type: object
+      properties:
+        packSize:
+          type: string
+          description: Package size
+        price:
+          type: number
+          description: List price
+        stockLevel:
+          type: string
+          enum:
+          - in-stock
+          - low-stock
+          - out-of-stock
+          - discontinued
+          description: Current stock availability
+        leadTimeDays:
+          type: integer
+          description: Expected delivery lead time in business days
+  parameters:
+    catalogNumber:
+      name: catalogNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Sigma-Aldrich API key for authentication
+externalDocs:
+  description: Sigma-Aldrich Developer Portal
+  url: https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal

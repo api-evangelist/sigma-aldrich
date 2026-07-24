@@ -1,0 +1,218 @@
+openapi: 3.1.0
+info:
+  title: Sigma-Aldrich Product Search Pricing and Availability Products API
+  description: The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.
+  version: '1.0'
+  contact:
+    name: Sigma-Aldrich Customer Support
+    url: https://www.sigmaaldrich.com/US/en/support/contact-us
+  termsOfService: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+  license:
+    name: Proprietary
+    url: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+servers:
+- url: https://api.sigmaaldrich.com/v1
+  description: Sigma-Aldrich Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Products
+  description: Product catalog search and retrieval for research chemicals, biochemicals, and laboratory supplies.
+paths:
+  /products/search:
+    get:
+      operationId: searchProducts
+      summary: Search Products
+      description: Search the Sigma-Aldrich product catalog by keyword, product name, catalog number, CAS number, or chemical formula. Returns paginated product results with basic metadata.
+      tags:
+      - Products
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Search query (product name, catalog number, CAS number, or formula)
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+        description: Number of results per page
+      - name: brand
+        in: query
+        schema:
+          type: string
+        description: Filter by brand (e.g., Sigma, Aldrich, Fluka, Supelco)
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - substance
+          - kit
+          - labware
+          - reagent
+        description: Filter by product type
+      responses:
+        '200':
+          description: Product search results returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResults'
+        '400':
+          description: Invalid search parameters
+        '401':
+          description: Invalid or missing API key
+        '429':
+          description: Rate limit exceeded
+  /products/{catalogNumber}:
+    get:
+      operationId: getProduct
+      summary: Get Product by Catalog Number
+      description: Returns detailed information for a specific product by its Sigma-Aldrich catalog number, including specifications, synonyms, physicochemical properties, safety data, and packaging options.
+      tags:
+      - Products
+      parameters:
+      - $ref: '#/components/parameters/catalogNumber'
+      responses:
+        '200':
+          description: Product details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: Product not found
+  /products/cas/{casNumber}:
+    get:
+      operationId: getProductByCas
+      summary: Get Product by CAS Number
+      description: Returns products matching a Chemical Abstracts Service (CAS) Registry Number. Multiple products may match a CAS number when a substance is available in different grades or formulations.
+      tags:
+      - Products
+      parameters:
+      - $ref: '#/components/parameters/casNumber'
+      responses:
+        '200':
+          description: Products matching CAS number returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResults'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: No products found for CAS number
+components:
+  schemas:
+    PackagingOption:
+      type: object
+      properties:
+        packSize:
+          type: string
+          description: Package size (e.g., 100g, 500mL, 1kg)
+        packagingType:
+          type: string
+          description: Container type (e.g., bottle, ampule, vial)
+    ProductSearchResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+          description: Total number of matching products
+        page:
+          type: integer
+        pageSize:
+          type: integer
+    Product:
+      type: object
+      properties:
+        catalogNumber:
+          type: string
+          description: Sigma-Aldrich catalog number
+        name:
+          type: string
+          description: Product name
+        description:
+          type: string
+          description: Product description
+        brand:
+          type: string
+          description: Sigma-Aldrich brand (Sigma, Aldrich, Fluka, Supelco)
+        casNumber:
+          type: string
+          description: CAS Registry Number
+        formula:
+          type: string
+          description: Molecular formula (e.g., C2H6O for ethanol)
+        molecularWeight:
+          type: number
+          description: Molecular weight in g/mol
+        smiles:
+          type: string
+          description: SMILES notation for the chemical structure
+        inchi:
+          type: string
+          description: IUPAC International Chemical Identifier (InChI)
+        purity:
+          type: string
+          description: Purity specification (e.g., ≥99.5%)
+        grade:
+          type: string
+          description: Product grade (e.g., ACS reagent, BioReagent, HPLC Plus)
+        synonyms:
+          type: array
+          items:
+            type: string
+          description: Alternative names for the product
+        physicalState:
+          type: string
+          enum:
+          - solid
+          - liquid
+          - gas
+          description: Physical state at room temperature
+        packagingOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackagingOption'
+  parameters:
+    catalogNumber:
+      name: catalogNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
+    casNumber:
+      name: casNumber
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^\d{1,7}-\d{2}-\d{1}$
+      description: CAS Registry Number in standard format (e.g., 7732-18-5 for water)
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Sigma-Aldrich API key for authentication
+externalDocs:
+  description: Sigma-Aldrich Developer Portal
+  url: https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal

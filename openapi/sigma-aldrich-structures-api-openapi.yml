@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Sigma-Aldrich Product Search Pricing and Availability Structures API
+  description: The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.
+  version: '1.0'
+  contact:
+    name: Sigma-Aldrich Customer Support
+    url: https://www.sigmaaldrich.com/US/en/support/contact-us
+  termsOfService: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+  license:
+    name: Proprietary
+    url: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+servers:
+- url: https://api.sigmaaldrich.com/v1
+  description: Sigma-Aldrich Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Structures
+  description: Chemical structure search using SMILES, InChI, or molecular formula notation for cheminformatics workflows.
+paths:
+  /structures/search:
+    post:
+      operationId: searchByStructure
+      summary: Search by Chemical Structure
+      description: Search for products by chemical structure using SMILES or InChI notation. Supports exact match, substructure search, and similarity search modes. Returns products containing or matching the specified chemical structure.
+      tags:
+      - Structures
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StructureSearchRequest'
+      responses:
+        '200':
+          description: Structure search results returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductSearchResults'
+        '400':
+          description: Invalid structure notation
+        '401':
+          description: Invalid or missing API key
+components:
+  schemas:
+    StructureSearchRequest:
+      type: object
+      required:
+      - structure
+      - searchType
+      properties:
+        structure:
+          type: string
+          description: Chemical structure in SMILES or InChI notation
+        searchType:
+          type: string
+          enum:
+          - exact
+          - substructure
+          - similarity
+          description: Type of structure search to perform
+        similarityThreshold:
+          type: number
+          minimum: 0
+          maximum: 1
+          default: 0.7
+          description: Minimum similarity score for similarity searches (0-1)
+        notation:
+          type: string
+          enum:
+          - smiles
+          - inchi
+          default: smiles
+          description: Chemical structure notation format
+    Product:
+      type: object
+      properties:
+        catalogNumber:
+          type: string
+          description: Sigma-Aldrich catalog number
+        name:
+          type: string
+          description: Product name
+        description:
+          type: string
+          description: Product description
+        brand:
+          type: string
+          description: Sigma-Aldrich brand (Sigma, Aldrich, Fluka, Supelco)
+        casNumber:
+          type: string
+          description: CAS Registry Number
+        formula:
+          type: string
+          description: Molecular formula (e.g., C2H6O for ethanol)
+        molecularWeight:
+          type: number
+          description: Molecular weight in g/mol
+        smiles:
+          type: string
+          description: SMILES notation for the chemical structure
+        inchi:
+          type: string
+          description: IUPAC International Chemical Identifier (InChI)
+        purity:
+          type: string
+          description: Purity specification (e.g., ≥99.5%)
+        grade:
+          type: string
+          description: Product grade (e.g., ACS reagent, BioReagent, HPLC Plus)
+        synonyms:
+          type: array
+          items:
+            type: string
+          description: Alternative names for the product
+        physicalState:
+          type: string
+          enum:
+          - solid
+          - liquid
+          - gas
+          description: Physical state at room temperature
+        packagingOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackagingOption'
+    PackagingOption:
+      type: object
+      properties:
+        packSize:
+          type: string
+          description: Package size (e.g., 100g, 500mL, 1kg)
+        packagingType:
+          type: string
+          description: Container type (e.g., bottle, ampule, vial)
+    ProductSearchResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+          description: Total number of matching products
+        page:
+          type: integer
+        pageSize:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Sigma-Aldrich API key for authentication
+externalDocs:
+  description: Sigma-Aldrich Developer Portal
+  url: https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal

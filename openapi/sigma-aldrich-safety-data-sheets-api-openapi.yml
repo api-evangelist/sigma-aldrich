@@ -1,0 +1,114 @@
+openapi: 3.1.0
+info:
+  title: Sigma-Aldrich Product Search Pricing and Availability Safety Data Sheets API
+  description: The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.
+  version: '1.0'
+  contact:
+    name: Sigma-Aldrich Customer Support
+    url: https://www.sigmaaldrich.com/US/en/support/contact-us
+  termsOfService: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+  license:
+    name: Proprietary
+    url: https://www.sigmaaldrich.com/US/en/terms-and-conditions
+servers:
+- url: https://api.sigmaaldrich.com/v1
+  description: Sigma-Aldrich Production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Safety Data Sheets
+  description: Retrieval of GHS-compliant Safety Data Sheets for regulatory compliance and laboratory safety management.
+paths:
+  /products/{catalogNumber}/sds:
+    get:
+      operationId: getProductSds
+      summary: Get Safety Data Sheet
+      description: Returns the GHS-compliant Safety Data Sheet for a specific product. SDSs are available in multiple languages and can be returned as JSON metadata or a PDF document URL for download.
+      tags:
+      - Safety Data Sheets
+      parameters:
+      - $ref: '#/components/parameters/catalogNumber'
+      - name: language
+        in: query
+        schema:
+          type: string
+          default: en-US
+        description: Language code for the SDS (e.g., en-US, de-DE, fr-FR, zh-CN)
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - json
+          - pdf-url
+          default: json
+        description: Response format — structured JSON or PDF download URL
+      responses:
+        '200':
+          description: Safety data sheet returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SafetyDataSheet'
+        '401':
+          description: Invalid or missing API key
+        '404':
+          description: SDS not found for this product
+components:
+  parameters:
+    catalogNumber:
+      name: catalogNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
+  schemas:
+    SafetyDataSheet:
+      type: object
+      properties:
+        catalogNumber:
+          type: string
+          description: Catalog number the SDS applies to
+        version:
+          type: string
+          description: SDS version number
+        revisionDate:
+          type: string
+          format: date
+          description: Date of last SDS revision
+        language:
+          type: string
+          description: Language code of this SDS
+        sections:
+          type: object
+          description: GHS SDS sections (1-16) with structured content
+          properties:
+            section1:
+              type: object
+              description: Identification
+            section2:
+              type: object
+              description: Hazard Identification
+            section3:
+              type: object
+              description: Composition/Information on Ingredients
+            section7:
+              type: object
+              description: Handling and Storage
+            section8:
+              type: object
+              description: Exposure Controls/Personal Protection
+        pdfUrl:
+          type: string
+          format: uri
+          description: URL to download the PDF version of the SDS
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Sigma-Aldrich API key for authentication
+externalDocs:
+  description: Sigma-Aldrich Developer Portal
+  url: https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
