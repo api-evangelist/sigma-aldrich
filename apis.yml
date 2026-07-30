@@ -1,68 +1,133 @@
 aid: sigma-aldrich
 url: https://raw.githubusercontent.com/api-evangelist/sigma-aldrich/refs/heads/main/apis.yml
 apis:
-  - aid: sigma-aldrich:sigma-aldrich-product-api
-    name: Sigma-Aldrich Product Search API
-    tags:
-      - Life Science
-      - Chemistry
-      - Products
-      - Search
-    humanURL: >-
+- aid: sigma-aldrich:sigma-aldrich-structure-search-api
+  name: Sigma-Aldrich Chemical Structure Search API
+  tags:
+  - Chemistry
+  - Cheminformatics
+  - Structure Search
+  - SMILES
+  humanURL: https://www.sigmaaldrich.com/US/en/support/contact-us
+  properties:
+  - url: https://www.sigmaaldrich.com/US/en/support/contact-us
+    type: Documentation
+  description: >-
+    The Sigma-Aldrich Chemical Structure Search API enables substructure, exact structure, and similarity
+    searches against the Sigma-Aldrich chemical catalog using SMILES, InChI, or molecular formula notation.
+    Supports configuring similarity thresholds and returning ranked results for drug discovery, materials
+    research, and synthetic chemistry workflows.
+- aid: sigma-aldrich:sigma-aldrich-sds-api
+  name: Sigma-Aldrich Safety Data Sheet API
+  tags:
+  - Safety
+  - SDS
+  - GHS
+  - Compliance
+  humanURL: https://www.sigmaaldrich.com/US/en/support/sds-portal
+  properties:
+  - url: https://www.sigmaaldrich.com/US/en/support/sds-portal
+    type: Documentation
+  description: >-
+    The Safety Data Sheet (SDS) API provides programmatic access to GHS- compliant Safety Data Sheets
+    for all Sigma-Aldrich chemical products. Enables EHS systems, LIMS platforms, and safety management
+    software to retrieve current SDSs in multiple languages and formats for regulatory compliance and
+    laboratory safety management.
+- aid: sigma-aldrich:sigma-aldrich-pricing-and-availability-api
+  name: Sigma-Aldrich Pricing and Availability API
+  description: Real-time pricing and global stock availability for Sigma-Aldrich products.
+  humanURL: >-
+    https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
+  tags:
+  - Pricing and Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/sigma-aldrich-pricing-and-availability-api-openapi.yml
+  - type: Documentation
+    url: >-
       https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
-    properties:
-      - url: >-
-          https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
-        type: Documentation
-      - url: openapi/sigma-aldrich-product-openapi.yml
-        type: OpenAPI
-      - url: rules/sigma-aldrich-rules.yml
-        type: SpectralRules
-      - url: capabilities/chemical-research.yaml
-        type: Capabilities
-      - url: json-schema/sigma-aldrich-product-schema.json
-        type: JSONSchema
-      - url: json-ld/sigma-aldrich-context.jsonld
-        type: JSONLD
-      - url: vocabulary/sigma-aldrich-vocabulary.yml
-        type: Vocabulary
-    description: >-
-      The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog containing
-      hundreds of thousands of chemical compounds, reagents, biochemicals, and laboratory supplies. Researchers and
-      laboratory information management systems (LIMS) can query products by CAS number, catalog number, product name,
-      or chemical structure (SMILES notation) to retrieve product details, safety data, pricing, and availability
-      information.
-  - aid: sigma-aldrich:sigma-aldrich-structure-search-api
-    name: Sigma-Aldrich Chemical Structure Search API
-    tags:
-      - Chemistry
-      - Cheminformatics
-      - Structure Search
-      - SMILES
-    humanURL: https://www.sigmaaldrich.com/US/en/support/contact-us
-    properties:
-      - url: https://www.sigmaaldrich.com/US/en/support/contact-us
-        type: Documentation
-    description: >-
-      The Sigma-Aldrich Chemical Structure Search API enables substructure, exact structure, and similarity searches
-      against the Sigma-Aldrich chemical catalog using SMILES, InChI, or molecular formula notation. Supports
-      configuring similarity thresholds and returning ranked results for drug discovery, materials research, and
-      synthetic chemistry workflows.
-  - aid: sigma-aldrich:sigma-aldrich-sds-api
-    name: Sigma-Aldrich Safety Data Sheet API
-    tags:
-      - Safety
-      - SDS
-      - GHS
-      - Compliance
-    humanURL: https://www.sigmaaldrich.com/US/en/support/sds-portal
-    properties:
-      - url: https://www.sigmaaldrich.com/US/en/support/sds-portal
-        type: Documentation
-    description: >-
-      The Safety Data Sheet (SDS) API provides programmatic access to GHS- compliant Safety Data Sheets for all
-      Sigma-Aldrich chemical products. Enables EHS systems, LIMS platforms, and safety management software to retrieve
-      current SDSs in multiple languages and formats for regulatory compliance and laboratory safety management.
+  - type: SpectralRules
+    url: rules/sigma-aldrich-rules.yml
+  - type: Capabilities
+    url: capabilities/chemical-research.yaml
+  - type: JSONSchema
+    url: json-schema/sigma-aldrich-product-schema.json
+  - type: JSONLD
+    url: json-ld/sigma-aldrich-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/sigma-aldrich-vocabulary.yml
+- aid: sigma-aldrich:sigma-aldrich-products-api
+  name: Sigma-Aldrich Products API
+  description: >-
+    Product catalog search and retrieval for research chemicals, biochemicals, and laboratory supplies.
+  humanURL: >-
+    https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/sigma-aldrich-products-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
+  - type: SpectralRules
+    url: rules/sigma-aldrich-rules.yml
+  - type: Capabilities
+    url: capabilities/chemical-research.yaml
+  - type: JSONSchema
+    url: json-schema/sigma-aldrich-product-schema.json
+  - type: JSONLD
+    url: json-ld/sigma-aldrich-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/sigma-aldrich-vocabulary.yml
+- aid: sigma-aldrich:sigma-aldrich-safety-data-sheets-api
+  name: Sigma-Aldrich Safety Data Sheets API
+  description: >-
+    Retrieval of GHS-compliant Safety Data Sheets for regulatory compliance and laboratory safety management.
+  humanURL: >-
+    https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
+  tags:
+  - Safety Data Sheets
+  properties:
+  - type: OpenAPI
+    url: openapi/sigma-aldrich-safety-data-sheets-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
+  - type: SpectralRules
+    url: rules/sigma-aldrich-rules.yml
+  - type: Capabilities
+    url: capabilities/chemical-research.yaml
+  - type: JSONSchema
+    url: json-schema/sigma-aldrich-product-schema.json
+  - type: JSONLD
+    url: json-ld/sigma-aldrich-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/sigma-aldrich-vocabulary.yml
+- aid: sigma-aldrich:sigma-aldrich-structures-api
+  name: Sigma-Aldrich Structures API
+  description: >-
+    Chemical structure search using SMILES, InChI, or molecular formula notation for cheminformatics workflows.
+  humanURL: >-
+    https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
+  tags:
+  - Structures
+  properties:
+  - type: OpenAPI
+    url: openapi/sigma-aldrich-structures-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
+  - type: SpectralRules
+    url: rules/sigma-aldrich-rules.yml
+  - type: Capabilities
+    url: capabilities/chemical-research.yaml
+  - type: JSONSchema
+    url: json-schema/sigma-aldrich-product-schema.json
+  - type: JSONLD
+    url: json-ld/sigma-aldrich-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/sigma-aldrich-vocabulary.yml
 name: Sigma-Aldrich
 tags:
   - Life Science
@@ -72,7 +137,20 @@ tags:
   - Research
   - Chemical Catalog
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sigma-aldrich.png
 access: 3rd-Party
 created: '2025-01-01'
 modified: '2026-05-19'
