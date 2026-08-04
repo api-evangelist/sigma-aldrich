@@ -1,0 +1,20 @@
+{
+  "provider": "sigma-aldrich",
+  "sources": [
+    "sigma-aldrich-pricing-and-availability-api-openapi.yml",
+    "sigma-aldrich-products-api-openapi.yml",
+    "sigma-aldrich-safety-data-sheets-api-openapi.yml",
+    "sigma-aldrich-structures-api-openapi.yml"
+  ],
+  "outputs": [
+    "sigma-aldrich-pricing-and-availability-api-openapi.yml",
+    "sigma-aldrich-products-api-openapi.yml",
+    "sigma-aldrich-safety-data-sheets-api-openapi.yml",
+    "sigma-aldrich-structures-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
