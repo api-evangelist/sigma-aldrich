@@ -48,8 +48,6 @@ apis:
       https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
   - type: SpectralRules
     url: rules/sigma-aldrich-rules.yml
-  - type: Capabilities
-    url: capabilities/chemical-research.yaml
   - type: JSONSchema
     url: json-schema/sigma-aldrich-product-schema.json
   - type: JSONLD
@@ -72,8 +70,6 @@ apis:
       https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
   - type: SpectralRules
     url: rules/sigma-aldrich-rules.yml
-  - type: Capabilities
-    url: capabilities/chemical-research.yaml
   - type: JSONSchema
     url: json-schema/sigma-aldrich-product-schema.json
   - type: JSONLD
@@ -96,8 +92,6 @@ apis:
       https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
   - type: SpectralRules
     url: rules/sigma-aldrich-rules.yml
-  - type: Capabilities
-    url: capabilities/chemical-research.yaml
   - type: JSONSchema
     url: json-schema/sigma-aldrich-product-schema.json
   - type: JSONLD
@@ -120,8 +114,6 @@ apis:
       https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
   - type: SpectralRules
     url: rules/sigma-aldrich-rules.yml
-  - type: Capabilities
-    url: capabilities/chemical-research.yaml
   - type: JSONSchema
     url: json-schema/sigma-aldrich-product-schema.json
   - type: JSONLD
