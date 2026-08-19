@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "2fde192e-ceac-4f85-ba08-c662bfd8de1c",
+      "name": "Safety Data Sheets",
+      "description": {
+        "content": "Retrieval of GHS-compliant Safety Data Sheets for regulatory compliance and laboratory safety management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca1b6780-6062-4f6c-8364-a1dc74c7b5ce",
+          "name": "Get Safety Data Sheet",
+          "request": {
+            "name": "Get Safety Data Sheet",
+            "description": {
+              "content": "Returns the GHS-compliant Safety Data Sheet for a specific product. SDSs are available in multiple languages and can be returned as JSON metadata or a PDF document URL for download.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":catalogNumber",
+                "sds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "en-US",
+                  "description": "Language code for the SDS (e.g., en-US, de-DE, fr-FR, zh-CN)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format — structured JSON or PDF download URL"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalogNumber",
+                  "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa5dcc76-a0d3-45b1-bcb0-86e3b81ffb50",
+              "name": "Safety data sheet returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "sds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"catalogNumber\": \"string\",\n  \"version\": \"string\",\n  \"revisionDate\": \"1956-09-04\",\n  \"language\": \"string\",\n  \"sections\": {\n    \"section1\": {},\n    \"section2\": {},\n    \"section3\": {},\n    \"section7\": {},\n    \"section8\": {}\n  },\n  \"pdfUrl\": \"http://XvfSCFjwmZywrUjrqaSmhUOMHdg.riaaN\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce034a11-ced6-409d-80cf-7366caca719c",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "sds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d425787-3336-418d-80dd-e21b60736bb7",
+              "name": "SDS not found for this product",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "sds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "language",
+                      "value": "en-US"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sigmaaldrich.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4edc60f2-073c-4847-ae0b-69a89ee11572",
+    "name": "Sigma-Aldrich Product Search Pricing and Availability Safety Data Sheets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.\n\nContact Support:\n Name: Sigma-Aldrich Customer Support",
+      "type": "text/plain"
+    }
+  }
+}

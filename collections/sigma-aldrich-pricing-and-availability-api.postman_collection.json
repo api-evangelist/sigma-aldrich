@@ -1,0 +1,267 @@
+{
+  "item": [
+    {
+      "id": "771263b9-6051-410a-9283-859b9d67a766",
+      "name": "Pricing and Availability",
+      "description": {
+        "content": "Real-time pricing and global stock availability for Sigma-Aldrich products.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f53bb25-b706-4a72-ae24-166106de52e1",
+          "name": "Get Product Pricing and Availability",
+          "request": {
+            "name": "Get Product Pricing and Availability",
+            "description": {
+              "content": "Returns current pricing and real-time stock availability for all packaging sizes of a product in the specified country/region.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":catalogNumber",
+                "pricing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "US",
+                  "description": "ISO 3166-1 alpha-2 country code for regional pricing"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalogNumber",
+                  "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa6cdd55-8274-42f5-8a3d-03428dc7ba23",
+              "name": "Pricing and availability returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"catalogNumber\": \"string\",\n  \"country\": \"string\",\n  \"currency\": \"string\",\n  \"prices\": [\n    {\n      \"packSize\": \"string\",\n      \"price\": 2481.310352738841,\n      \"stockLevel\": \"out-of-stock\",\n      \"leadTimeDays\": 9265\n    },\n    {\n      \"packSize\": \"string\",\n      \"price\": 6988.870880810277,\n      \"stockLevel\": \"in-stock\",\n      \"leadTimeDays\": 1795\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e28e4fd1-0f65-403c-83fa-c5973746016a",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a14fda9e-8ab6-4598-8bde-a98f66dc6a7a",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":catalogNumber",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogNumber",
+                      "description": "(Required) Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sigmaaldrich.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cc8cdf9c-ada4-44ca-87b4-84cfe2ddb60f",
+    "name": "Sigma-Aldrich Product Search Pricing and Availability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.\n\nContact Support:\n Name: Sigma-Aldrich Customer Support",
+      "type": "text/plain"
+    }
+  }
+}

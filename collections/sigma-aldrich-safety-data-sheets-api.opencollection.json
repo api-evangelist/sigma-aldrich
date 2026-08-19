@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sigma-Aldrich Product Search Pricing and Availability Safety Data Sheets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Safety Data Sheets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Safety Data Sheet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sigmaaldrich.com/v1/products/:catalogNumber/sds",
+            "params": [
+              {
+                "name": "catalogNumber",
+                "value": "",
+                "type": "path",
+                "description": "Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "Language code for the SDS (e.g., en-US, de-DE, fr-FR, zh-CN)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format — structured JSON or PDF download URL"
+              }
+            ]
+          },
+          "docs": "Returns the GHS-compliant Safety Data Sheet for a specific product. SDSs are available in multiple languages and can be returned as JSON metadata or a PDF document URL for download."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

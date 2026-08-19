@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sigma-Aldrich Product Search Pricing and Availability API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pricing and Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Product Pricing and Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sigmaaldrich.com/v1/products/:catalogNumber/pricing",
+            "params": [
+              {
+                "name": "catalogNumber",
+                "value": "",
+                "type": "path",
+                "description": "Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code for regional pricing"
+              }
+            ]
+          },
+          "docs": "Returns current pricing and real-time stock availability for all packaging sizes of a product in the specified country/region."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

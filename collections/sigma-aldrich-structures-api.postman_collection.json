@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "23415517-9fd6-4d19-9120-a6025ab1aa2d",
+      "name": "Structures",
+      "description": {
+        "content": "Chemical structure search using SMILES, InChI, or molecular formula notation for cheminformatics workflows.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e11ee2a-d699-4cb1-ac17-e947088d9d7d",
+          "name": "Search by Chemical Structure",
+          "request": {
+            "name": "Search by Chemical Structure",
+            "description": {
+              "content": "Search for products by chemical structure using SMILES or InChI notation. Supports exact match, substructure search, and similarity search modes. Returns products containing or matching the specified chemical structure.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structures",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"structure\": \"<string>\",\n  \"searchType\": \"<string>\",\n  \"similarityThreshold\": 0.7,\n  \"notation\": \"smiles\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1ca895b-3063-4e90-bb48-e8e8f757c3ef",
+              "name": "Structure search results returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structures",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"searchType\": \"<string>\",\n  \"similarityThreshold\": 0.7,\n  \"notation\": \"smiles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"catalogNumber\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"brand\": \"string\",\n      \"casNumber\": \"string\",\n      \"formula\": \"string\",\n      \"molecularWeight\": 130.24744143022016,\n      \"smiles\": \"string\",\n      \"inchi\": \"string\",\n      \"purity\": \"string\",\n      \"grade\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"physicalState\": \"solid\",\n      \"packagingOptions\": [\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        },\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        }\n      ]\n    },\n    {\n      \"catalogNumber\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"brand\": \"string\",\n      \"casNumber\": \"string\",\n      \"formula\": \"string\",\n      \"molecularWeight\": 2397.831621101514,\n      \"smiles\": \"string\",\n      \"inchi\": \"string\",\n      \"purity\": \"string\",\n      \"grade\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"physicalState\": \"solid\",\n      \"packagingOptions\": [\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        },\n        {\n          \"packSize\": \"string\",\n          \"packagingType\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total\": 8183,\n  \"page\": 4422,\n  \"pageSize\": 6492\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e5b72af-f670-4c47-821b-d29a8cdfe979",
+              "name": "Invalid structure notation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structures",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"searchType\": \"<string>\",\n  \"similarityThreshold\": 0.7,\n  \"notation\": \"smiles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c88a86f0-88aa-485e-a1b2-2b338cc4f3ab",
+              "name": "Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structures",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"searchType\": \"<string>\",\n  \"similarityThreshold\": 0.7,\n  \"notation\": \"smiles\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sigmaaldrich.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6abe5fbf-9638-4b96-aeda-78532bab54c6",
+    "name": "Sigma-Aldrich Product Search Pricing and Availability Structures API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.\n\nContact Support:\n Name: Sigma-Aldrich Customer Support",
+      "type": "text/plain"
+    }
+  }
+}
