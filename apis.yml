@@ -61,6 +61,8 @@ apis:
   humanURL: >-
     https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/chemistry/labware/sigma-aldrich-developer-portal
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
