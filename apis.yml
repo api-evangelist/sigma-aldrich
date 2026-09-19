@@ -124,6 +124,13 @@ apis:
     url: vocabulary/sigma-aldrich-vocabulary.yml
 name: Sigma-Aldrich
 tags:
+  - Life Sciences
+  - Chemistry
+  - Biochemistry
+  - Laboratory
+  - Research
+  - Chemical Catalog
+tags_raw:
   - Life Science
   - Chemistry
   - Biochemistry
