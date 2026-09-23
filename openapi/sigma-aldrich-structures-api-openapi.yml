@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sigma-Aldrich Product Search Pricing and Availability Structures API
-  description: The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.
+  title: Sigma-Aldrich Product Search Structures API
+  description: The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world.
   version: '1.0'
   contact:
     name: Sigma-Aldrich Customer Support
@@ -74,6 +74,29 @@ components:
           - inchi
           default: smiles
           description: Chemical structure notation format
+    PackagingOption:
+      type: object
+      properties:
+        packSize:
+          type: string
+          description: Package size (e.g., 100g, 500mL, 1kg)
+        packagingType:
+          type: string
+          description: Container type (e.g., bottle, ampule, vial)
+    ProductSearchResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+          description: Total number of matching products
+        page:
+          type: integer
+        pageSize:
+          type: integer
     Product:
       type: object
       properties:
@@ -126,29 +149,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PackagingOption'
-    PackagingOption:
-      type: object
-      properties:
-        packSize:
-          type: string
-          description: Package size (e.g., 100g, 500mL, 1kg)
-        packagingType:
-          type: string
-          description: Container type (e.g., bottle, ampule, vial)
-    ProductSearchResults:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-        total:
-          type: integer
-          description: Total number of matching products
-        page:
-          type: integer
-        pageSize:
-          type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

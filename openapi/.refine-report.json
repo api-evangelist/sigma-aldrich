@@ -1,10 +1,7 @@
 {
   "provider": "sigma-aldrich",
   "sources": [
-    "sigma-aldrich-pricing-and-availability-api-openapi.yml",
-    "sigma-aldrich-products-api-openapi.yml",
-    "sigma-aldrich-safety-data-sheets-api-openapi.yml",
-    "sigma-aldrich-structures-api-openapi.yml"
+    "_original/sigma-aldrich-product-openapi.yml"
   ],
   "outputs": [
     "sigma-aldrich-pricing-and-availability-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sigma-aldrich-product-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sigma-aldrich-pricing-and-availability-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sigma-aldrich-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sigma-aldrich-safety-data-sheets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sigma-aldrich-structures-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Sigma-Aldrich Product Search Pricing and Availability Products API
-  description: The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world. Researchers and LIMS systems can search products by catalog number, CAS number, product name, or chemical structure notation (SMILES/InChI) and retrieve detailed product information including specifications, safety data, pricing, and availability from global distribution centers.
+  title: Sigma-Aldrich Product Search Products API
+  description: The Sigma-Aldrich Product Search API provides programmatic access to the Sigma-Aldrich product catalog — one of the largest collections of research chemicals, biochemicals, reagents, and laboratory supplies in the world.
   version: '1.0'
   contact:
     name: Sigma-Aldrich Customer Support
@@ -115,6 +115,22 @@ paths:
         '404':
           description: No products found for CAS number
 components:
+  parameters:
+    catalogNumber:
+      name: catalogNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
+    casNumber:
+      name: casNumber
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^\d{1,7}-\d{2}-\d{1}$
+      description: CAS Registry Number in standard format (e.g., 7732-18-5 for water)
   schemas:
     PackagingOption:
       type: object
@@ -191,22 +207,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PackagingOption'
-  parameters:
-    catalogNumber:
-      name: catalogNumber
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
-    casNumber:
-      name: casNumber
-      in: path
-      required: true
-      schema:
-        type: string
-        pattern: ^\d{1,7}-\d{2}-\d{1}$
-      description: CAS Registry Number in standard format (e.g., 7732-18-5 for water)
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

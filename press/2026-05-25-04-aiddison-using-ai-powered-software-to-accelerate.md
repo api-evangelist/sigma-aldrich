@@ -1,7 +1,9 @@
 ---
 title: 'AIDDISON™: Using AI-Powered Software to Accelerate ...'
 url: https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/337/293/aiddison-wp11667en-ms.pdf?srsltid=AfmBOorzcyht-cJN5uA5Ja97HzfX965AcgyqtWRQLv_cgMtvNL4LfhrA
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Sigma-Aldrich" press release artificial intelligence'
 position: 4
 source: serpapi-google
