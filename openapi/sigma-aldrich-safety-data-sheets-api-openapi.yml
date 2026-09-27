@@ -55,14 +55,6 @@ paths:
         '404':
           description: SDS not found for this product
 components:
-  parameters:
-    catalogNumber:
-      name: catalogNumber
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
   schemas:
     SafetyDataSheet:
       type: object
@@ -103,6 +95,14 @@ components:
           type: string
           format: uri
           description: URL to download the PDF version of the SDS
+  parameters:
+    catalogNumber:
+      name: catalogNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
