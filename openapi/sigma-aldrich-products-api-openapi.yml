@@ -168,15 +168,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PackagingOption'
-    PackagingOption:
-      type: object
-      properties:
-        packSize:
-          type: string
-          description: Package size (e.g., 100g, 500mL, 1kg)
-        packagingType:
-          type: string
-          description: Container type (e.g., bottle, ampule, vial)
     ProductSearchResults:
       type: object
       properties:
@@ -191,14 +182,16 @@ components:
           type: integer
         pageSize:
           type: integer
+    PackagingOption:
+      type: object
+      properties:
+        packSize:
+          type: string
+          description: Package size (e.g., 100g, 500mL, 1kg)
+        packagingType:
+          type: string
+          description: Container type (e.g., bottle, ampule, vial)
   parameters:
-    catalogNumber:
-      name: catalogNumber
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
     casNumber:
       name: casNumber
       in: path
@@ -207,6 +200,13 @@ components:
         type: string
         pattern: ^\d{1,7}-\d{2}-\d{1}$
       description: CAS Registry Number in standard format (e.g., 7732-18-5 for water)
+    catalogNumber:
+      name: catalogNumber
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Sigma-Aldrich catalog number (e.g., A1048, M8159, CAS1234-56-7)
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
