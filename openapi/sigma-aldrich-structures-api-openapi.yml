@@ -45,58 +45,6 @@ paths:
           description: Invalid or missing API key
 components:
   schemas:
-    ProductSearchResults:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-        total:
-          type: integer
-          description: Total number of matching products
-        page:
-          type: integer
-        pageSize:
-          type: integer
-    PackagingOption:
-      type: object
-      properties:
-        packSize:
-          type: string
-          description: Package size (e.g., 100g, 500mL, 1kg)
-        packagingType:
-          type: string
-          description: Container type (e.g., bottle, ampule, vial)
-    StructureSearchRequest:
-      type: object
-      required:
-      - structure
-      - searchType
-      properties:
-        structure:
-          type: string
-          description: Chemical structure in SMILES or InChI notation
-        searchType:
-          type: string
-          enum:
-          - exact
-          - substructure
-          - similarity
-          description: Type of structure search to perform
-        similarityThreshold:
-          type: number
-          minimum: 0
-          maximum: 1
-          default: 0.7
-          description: Minimum similarity score for similarity searches (0-1)
-        notation:
-          type: string
-          enum:
-          - smiles
-          - inchi
-          default: smiles
-          description: Chemical structure notation format
     Product:
       type: object
       properties:
@@ -149,6 +97,58 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PackagingOption'
+    ProductSearchResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+          description: Total number of matching products
+        page:
+          type: integer
+        pageSize:
+          type: integer
+    StructureSearchRequest:
+      type: object
+      required:
+      - structure
+      - searchType
+      properties:
+        structure:
+          type: string
+          description: Chemical structure in SMILES or InChI notation
+        searchType:
+          type: string
+          enum:
+          - exact
+          - substructure
+          - similarity
+          description: Type of structure search to perform
+        similarityThreshold:
+          type: number
+          minimum: 0
+          maximum: 1
+          default: 0.7
+          description: Minimum similarity score for similarity searches (0-1)
+        notation:
+          type: string
+          enum:
+          - smiles
+          - inchi
+          default: smiles
+          description: Chemical structure notation format
+    PackagingOption:
+      type: object
+      properties:
+        packSize:
+          type: string
+          description: Package size (e.g., 100g, 500mL, 1kg)
+        packagingType:
+          type: string
+          description: Container type (e.g., bottle, ampule, vial)
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
