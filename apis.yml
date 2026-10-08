@@ -179,6 +179,12 @@ description: >-
   continuing to provide the world's largest catalog of research chemicals, biochemicals, laboratory equipment, and life
   science products to researchers globally.
 common:
+  - type: Plans
+    url: plans/sigma-aldrich-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/sigma-aldrich-rate-limits.yml
+  - type: FinOps
+    url: finops/sigma-aldrich-finops.yml
   - type: AgenticAccess
     url: agentic-access/sigma-aldrich-agentic-access.yml
   - type: DomainSecurity
