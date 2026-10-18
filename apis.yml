@@ -21,6 +21,11 @@ apis:
   name: Sigma-Aldrich Safety Data Sheet API
   tags:
   - Safety
+  - Safety Data Sheets
+  - GHS
+  - Compliance
+  tags_raw:
+  - Safety
   - SDS
   - GHS
   - Compliance
